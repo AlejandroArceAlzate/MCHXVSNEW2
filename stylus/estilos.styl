@@ -1,21 +1,33 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed)
+@import "nib"
 @import "normalize.styl"
 
 parte_roja= #EE1515
 parte_negra= #222224
 parte_blanca= #F0F0F0
 
+a 
+	color parte_negra
+	text-decoration none
 body
 	font-family 'Roboto Condensed', sans-serif
 	font-size 16px 
-.battlefield
-	position absolute
+.ataque1, .ataque2
+	background yellow
+	border-left 2px solid gray 
+	border-right 2px solid gray
+	margin .1em
+	padding .5em
+	&:active
+		height 2em
+		width 3em
+.battlefield 
+	background parte_blanca
+	text-align center
+	vertical-align top
+	width 100%
 .block 
 	display block
-.inferior
-	background parte_blanca
-	height 20em
-	width 100%
 .inline
 	display inline-block
 .medio
@@ -35,17 +47,49 @@ body
 		border 1px solid parte_negra
 		border-radius 50%
 		height 1em
-		top .2em
 		left .2em 
 		position absolute
+		top .2em
 		width 1em
-		&:hover
-			background parte_roja
+		animation 2s catch infinite linear
+
+@keyframes catch 
+	0%
+		background parte_blanca
+	50%
+		background parte_roja
+	100%
+		background parte_blanca
 		
+.newtwo
+	margin-top 1.4em
+	vertical-align top
+.nombreataque
+	margin 0
+.ps 
+	margin 0
+.set1
+	margin .2em
+.set2
+	.ataque3, .ataque4
+		background yellow
+		border-left 2px solid gray 
+		border-right 2px solid gray
+		margin .1em
+		padding .5em
+		&:active
+			height 2em
+			width 3em
 .superior
 	background parte_roja
 	height 20em
 	margin 0 auto
 	padding-top 2em
+	text-align center
 	width 100%
+.vs
+	margin-top 5em
+	vertical-align top
 
+
+	
