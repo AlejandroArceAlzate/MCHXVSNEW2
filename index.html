@@ -8,12 +8,12 @@
     </head>
     <body>
     	<div class="superior">
-			<h1>Mega Charizard X VS NewTwo</h1>
+			<h1>Mega Charizard X VS MewTwo</h1>
 			<p>
 				Este juego esta inspirado en la popular batalla del spin off de la serie Pokemon- Pokemon Origins
 			</p>
 			<p>
-				Trata de guiar a Mega Charizard X para que pueda vencer a Newtwo en esta dificil batalla, Mucha suerte!
+				Trata de guiar a Mega Charizard X para que pueda vencer a Mewtwo en esta dificil batalla, Mucha suerte!
 			</p>
     	</div>
     	<div class="medio">
@@ -27,13 +27,16 @@
     		<figure class="charizard inline">
     			<img src="img/600px-006Charizard-Mega_X.png" alt="Mega Charizard X" />
     			<div class="detallescharizard">
+                    <p id="NombreCharizard" class="block">Nombre</p>
     				<p id="CharizardHP" class="vida block">HP: 100</p>
+                    <p id="CharizardLVL" class="block">0</p>
+                    <p id="CharizardTipo" class="block">Normal</p>
                     <div class="ataques">
                         <div class="set1">
                             <a href="">
                                 <div class="ataque1 inline">
-                                    <p class="nombreataque">ataque1</p>
-                                    <p class="ps"><span class="psactual">10</span><span class="pstotal">/10</span></p>
+                                    <p id="ataquenombre"class="nombreataque">ataque1</p>
+                                    <p class="ps"><span id="ppactual"class="psactual">10</span><span id="pptotal" class="pstotal">/10</span></p>
                                 </div>
                             </a>
                             <a href="#">
@@ -64,10 +67,14 @@
     		<figure class="newtwo inline">
     			<img src="img/Mewtwo.png" alt="Newtwo" />
     			<div class="detallesnewtwo">
-    				<p id="NewtwoHP" class="vida">HP: 100</p>
+    				<p id="NombreMewtwo" class="block">Nombre</p>
+                    <p id="MewtwoHP" class="vida block">HP: 100</p>
+                    <p id="MewtwoLVL" class="block">0</p>
+                    <p id="MewtwoTipo" class="block">Normal</p>
     			</div>
     		</figure>
     	</div>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
     </body>
 </html>
