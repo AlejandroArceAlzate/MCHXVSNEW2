@@ -1,99 +1,73 @@
-var Pokemon = function(t, l, hp, atk, def, spatk, spdef, speed)
-{
-	this.Tipe = t;
-	this.Level= l;
-	this.Hp = hp;
-	this.Atk= atk;
-	this.Defense = def;
-	this.Spatk = spatk;
-	this.Spdef = spdef;
-	this.Speed = speed;
+$.getJSON("Pokemon.json", function(data){
 
-}
+	var PPactual = data.Pokemon[0].AttackSet[0].AttackName;
+	var Level = data.Pokemon[0].Level;
+	var Atk = data.Pokemon[0].Atk;
+	var Spatk = data.Pokemon[0].Spatk;
+	var Def = data.Pokemon[1].Defense;
+	var Spdef = data.Pokemon[1].Spdef
+	var PotenciaAtaque = data.Pokemon[0].AttackSet[0].Potencia;
+	var Hp = data.Pokemon[1].Hp;
 
-var ataque = function(N, P, Prec, PPA, PPT)
-{
-	this.Nombre = N;
-	this.Potencia = P;
-	this.Precision = Prec;
-	this.PPactual = PPA;
-	this.PPtotal = PPT;
-}
+	$("#NombreCharizard").text(data.Pokemon[0].Name);
+	$("#CharizardHP").text("HP: " + data.Pokemon[0].Hp);
+	$("#CharizardLVL").text("LVL: " + data.Pokemon[0].Level);
+	$("#CharizardTipo").text("Tipo: " + data.Pokemon[0].Tipe);
 
-var Charizard = new Pokemon("Fuego-Dragon", 100, 360, 394, 353, 394, 295, 328);
-var Mewtwo = new Pokemon("Psiquico", 100, 416, 350, 306, 447, 306, 394);
+	$("#ataque1nombre").text(data.Pokemon[0].AttackSet[0].AttackName);
+	$("#pp1actual").text(data.Pokemon[0].AttackSet[0].PPactual);
+	$("#pp1total").text("/" + data.Pokemon[0].AttackSet[0].PPtotal);
 
-var llamarada = new ataque("FireBlast", 100, 85, 5, 5);
-var cuchillada = new ataque("Slash", 70, 100, 20, 20);
-var rapidez = new ataque("Swift", 60, 100, 20, 20);
-var megapatada = new ataque("MegaKick", 120, 75, 5, 5);
+	$("#ataque2nombre").text(data.Pokemon[0].AttackSet[1].AttackName);
+	$("#pp2actual").text(data.Pokemon[0].AttackSet[1].PPactual);
+	$("#pp2total").text("/" + data.Pokemon[0].AttackSet[1].PPtotal);
 
-function imprimirDatosPokemon()
-{
-	
+	$("#ataque3nombre").text(data.Pokemon[0].AttackSet[2].AttackName);
+	$("#pp3actual").text(data.Pokemon[0].AttackSet[2].PPactual);
+	$("#pp3total").text("/" + data.Pokemon[0].AttackSet[2].PPtotal);
 
-	$("#NombreCharizard").text("Charizard");
-	$("#CharizardHP").text("HP: " + Charizard.Hp);
-	$("#CharizardLVL").text("LVL: " + Charizard.Level);
-	$("#CharizardTipo").text("Tipo: " + Charizard.Tipe);
+	$("#ataque4nombre").text(data.Pokemon[0].AttackSet[3].AttackName);
+	$("#pp4actual").text(data.Pokemon[0].AttackSet[3].PPactual);
+	$("#pp4total").text("/" + data.Pokemon[0].AttackSet[3].PPtotal);
 
-	$("#NombreMewtwo").text("Mewtwo");
-	$("#MewtwoHP").text("HP: " + Mewtwo.Hp);
-	$("#MewtwoLVL").text("LVL: " + Mewtwo.Level);
-	$("#MewtwoTipo").text("Tipo: " + Mewtwo.Tipe);
+	$("#NombreMewtwo").text(data.Pokemon[1].Name);
+	$("#MewtwoHP").text("HP: " + data.Pokemon[1].Hp);
+	$("#MewtwoLVL").text("LVL: " + data.Pokemon[1].Level);
+	$("#MewtwoTipo").text("Tipo: " + data.Pokemon[1].Tipe);
 
-}
-
-
-function imprimirAtaques()
-{
-	$("#ataque1nombre").text(llamarada.Nombre);
-	$("#pp1actual").text(llamarada.PPactual);
-	$("#pp1total").text("/" + llamarada.PPtotal);
-
-	$("#ataque2nombre").text(cuchillada.Nombre);
-	$("#pp2actual").text(cuchillada.PPactual);
-	$("#pp2total").text("/" + cuchillada.PPtotal);
-
-	$("#ataque4nombre").text(rapidez.Nombre);
-	$("#pp4actual").text(rapidez.PPactual);
-	$("#pp4total").text("/" + rapidez.PPtotal);
-
-	$("#ataque3nombre").text(megapatada.Nombre);
-	$("#pp3actual").text(megapatada.PPactual);
-	$("#pp3total").text("/" + megapatada.PPtotal);
-}
-
-function atacarConSpatk()
-{
-	if(llamarada.PPactual > 0)
+	function aleatorio(minimo, maximo)
 	{
-		var B = 1.5
-		var daño = (0.01* B* 1*85*((0.2* Charizard.Level + 1)*(Charizard.Spatk * llamarada.Potencia)/(25 * Mewtwo.Spdef)) + 2);
+		var numero = Math.floor( Math.random() * (maximo - minimo + 1) + minimo);
+		return numero;
+	}
 
-		Mewtwo.Hp -= Math.round(daño);
-		llamarada.PPactual -= 1;
-
-		if(Mewtwo.Hp <= 0)
+	function CharizardAtaca(event, ataque)
+	{
+		event.preventDefault();
+		var ataque = data.Pokemon[0].AttackSet[0];
+		console.log(ataque); 
+		if(PPactual > 0)
 		{
-			Mewtwo.Hp = "Fainted";
-			$("#MewtwoHP").text("HP: " + Mewtwo.Hp);
-			alert("Haz Derrotado a Mewtwo, FELICIDADES!!!!");
+			var B = 1.5;
+			var A = aleatorio(85, 100);
+			var daño = (0.01* B* 1*A*((0.2* Level + 1)*(Spatk * PotenciaAtaque)/(25 * Spdef)) + 2);
+
+			Hp -= Math.round(daño);
+			PPactual -= 1;
+			$("#MewtwoHP").text("HP: " + Hp);
+			$("#pp1actual").text(PPactual);
 		}
+		else
+		{
+			
+			PPactual = "0";
+			$("#pp1actual").text(PPactual);
+			alert("Ya no puedes usar mas ese ataque!");
+		}	
+				
 	}
-	else
-	{
-		
-		llamarada.PPactual = "0";
-		$("#pp1actual").text(llamarada.PPactual);
-		alert("Ya no puedes usar mas ese ataque!");
-	}
 
-	imprimirDatosPokemon();
-	imprimirAtaques();
-}
+	$(".ataque1").on("click", CharizardAtaca);
 
-imprimirDatosPokemon();
-imprimirAtaques();
-
-$(".ataque1").on("click", atacarConLlamarada);
+});
+	

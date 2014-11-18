@@ -1,0 +1,94 @@
+{
+  "Pokemon": [
+    {
+      "Name": "Charizard",
+      "Tipe": "Fuego-Dragón",
+      "Level": 100,
+      "Hp": 360,
+      "Atk": 394,
+      "Defense": 353,
+      "Spatk": 394,
+      "Spdef": 295,
+      "Speed": 328,
+      "AttackSet": [
+        {
+          "AttackName": "FireBlast",
+          "AttackTipe": "Especial",
+          "Potencia": 100,
+          "Precision": 85,
+          "PPactual": 5,
+          "PPtotal": 5
+        },
+        {
+          "AttackName": "Slash",
+          "AttackTipe": "Fisico",
+          "Potencia": 70,
+          "Precision": 100,
+          "PPactual": 20,
+          "PPtotal": 20
+        },
+        {
+          "AttackName": "Swift",
+          "AttackTipe": "Fisico",
+          "Potencia": 60,
+          "Precision": 100,
+          "PPactual": 20,
+          "PPtotal": 20
+        },
+        {
+          "AttackName": "MegaKick",
+          "AttackTipe": "Fisico",
+          "Potencia": 120,
+          "Precision": 75,
+          "PPactual": 5,
+          "PPtotal": 5
+        }
+      ]
+    },
+    {
+      "Name": "Mewtwo",
+      "Tipe": "Psíquico",
+      "Level": 100,
+      "Hp": 416,
+      "Atk": 350,
+      "Defense": 306,
+      "Spatk": 447,
+      "Spdef": 306,
+      "Speed": 394,
+      "AttackSet": [
+        {
+          "AttackName": "Physic",
+          "AttackTipe": "Especial",
+          "Potencia": 90,
+          "Precision": 100,
+          "PPactual": 15,
+          "PPtotal": 15
+        },
+        {
+          "AttackName": "PyschoCut",
+          "AttackTipe": "Fisico",
+          "Potencia": 70,
+          "Precision": 100,
+          "PPactual": 20,
+          "PPtotal": 20
+        },
+        {
+          "AttackName": "Swift",
+          "AttackTipe": "Fisico",
+          "Potencia": 60,
+          "Precision": 100,
+          "PPactual": 20,
+          "PPtotal": 20
+        },
+        {
+          "AttackName": "MegaKick",
+          "AttackTipe": "Fisico",
+          "Potencia": 120,
+          "Precision": 75,
+          "PPactual": 5,
+          "PPtotal": 5
+        }
+      ]
+    }
+  ]
+}
