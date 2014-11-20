@@ -81,10 +81,10 @@
           "PPtotal": 20
         },
         {
-          "AttackName": "MegaKick",
-          "AttackTipe": "Fisico",
-          "Potencia": 120,
-          "Precision": 75,
+          "AttackName": "Recover",
+          "AttackTipe": "Otro",
+          "Potencia": "-",
+          "Precision": 100,
           "PPactual": 5,
           "PPtotal": 5
         }

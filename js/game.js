@@ -19,7 +19,7 @@ $.getJSON("Pokemon.json", function(data){
 		MewtwoDef = data.Pokemon[1].Defense,
 		MewtwoSpdef = data.Pokemon[1].Spdef,
 		MewtwoHp = data.Pokemon[1].Hp,
-		MewtwoHAttackSet = data.Pokemon[1].AttackSet;
+		MewtwoAttackSet = data.Pokemon[1].AttackSet;
 
 	function imprimirDatosPokemon()
 	{
@@ -62,44 +62,68 @@ $.getJSON("Pokemon.json", function(data){
 			var A = aleatorio(85, 100);
 			var valor = aleatorio(0, 3);
 			console.log("entra en la funcion");
-		    if(MewtwoHAttackSet[valor].AttackTipe == "Especial" && MewtwoHAttackSet[valor].PPactual > 0)
+			if(MewtwoHP > 0)
 		    {
-		    	var B = 1.5;
-			    var daño = (0.01* B* 1*A*((0.2* MewtwoLVL + 1)*(MewtwoSpatk * MewtwoHAttackSet[valor].Potencia)/(25 * CharizardSpdef)) + 2);
-			    CharizardHP -= Math.round(daño);
-				MewtwoHAttackSet[valor].PPactual -= 1;
-				console.log("entra en la condicion Especial");
-			    if(CharizardHP > 0)
+			    if(MewtwoAttackSet[valor].AttackTipe == "Especial" && MewtwoAttackSet[valor].PPactual > 0)
 			    {
-				    $("#CharizardHP").text("HP: " + CharizardHP);
+			    	var B = 1.5;
+				    var daño = (0.01* B* 1*A*((0.2* MewtwoLVL + 1)*(MewtwoSpatk * MewtwoAttackSet[valor].Potencia)/(25 * CharizardSpdef)) + 2);
+				    CharizardHP -= Math.round(daño);
+					MewtwoAttackSet[valor].PPactual -= 1;
+					console.log("entra en la condicion Especial");
+				    if(CharizardHP > 0)
+				    {
+					    $("#CharizardHP").text("HP: " + CharizardHP);
+				    }
+				    else
+				    {
+				    	$("#CharizardHP").text("HP: Fainted");
+				    	alert("Mewtwo te ha derrotado");
+				    }
+			    }
+			    else if(MewtwoAttackSet[valor].AttackTipe == "Fisico"  && MewtwoAttackSet[valor].PPactual > 0)
+			    {
+			    	var B = 1;
+					var daño = (0.01* B* 1*A*((0.2* MewtwoLVL + 1)*(MewtwoAtk * MewtwoAttackSet[valor].Potencia)/(25 * CharizardDef)) + 2);
+					CharizardHP -= Math.round(daño);
+				    MewtwoAttackSet[valor].PPactual -= 1;
+				    console.log("entra en la condicion Fisico");
+				    console.log(MewtwoAttackSet[valor].AttackTipe);
+				    console.log(MewtwoAttackSet[valor].AttackName);
+				    console.log(MewtwoAttackSet[valor].Potencia);
+				    console.log(daño);
+
+				    if(CharizardHP > 0)
+				    {
+					    $("#CharizardHP").text("HP: " + CharizardHP);
+				    }
+				    else
+				    {
+				    	$("#CharizardHP").text("HP: Fainted");
+				    	alert("Mewtwo te ha derrotado");
+				    }
+			    }
+			    else if(MewtwoAttackSet[valor].AttackTipe == "Otro" && MewtwoAttackSet[valor].PPactual > 0)
+			    {
+			    	if(MewtwoHP >0 && MewtwoHP < 416)
+			    	{
+				    	MewtwoHP += 150;
+				    	MewtwoAttackSet[valor].PPactual -= 1;
+				    	if(MewtwoHP > 416)
+				    		MewtwoHP = 416; 
+					    console.log(MewtwoAttackSet[valor].AttackName);
+				    	$("#MewtwoHP").text("HP: " + MewtwoHP);
+			    	}
+			    	else
+			    	{
+			    		console.log("Mewtwo a intentado usar " + MewtwoAttackSet[valor].AttackName + " pero fallo..");
+			    	}
 			    }
 			    else
 			    {
-			    	$("#CharizardHP").text("HP: Fainted");
-			    	alert("Mewtwo te ha derrotado");
+				    MewtwoAttackSet[valor].PPactual = "0";
+				    alert("Mewtwo ha intentado usar "+ MewtwoAttackSet[valor].AttackName +" pero ya no tiene muchas energias para hacerlo");
 			    }
-		    }
-		    else if(MewtwoHAttackSet[valor].AttackTipe == "Fisico"  && MewtwoHAttackSet[valor].PPactual > 0)
-		    {
-		    	var B = 1;
-				var daño = (0.01* B* 1*A*((0.2* CharizardLVL + 1)*(CharizardAtk * MewtwoHAttackSet[valor].Potencia)/(25 * MewtwoDef)) + 2);
-				MewtwoHP -= Math.round(daño);
-			    MewtwoHAttackSet[valor].PPactual -= 1;
-			    console.log("entra en la condicion Fisico");
-			    if(CharizardHP > 0)
-			    {
-				    $("#CharizardHP").text("HP: " + CharizardHP);
-			    }
-			    else
-			    {
-			    	$("#CharizardHP").text("HP: Fainted");
-			    	alert("Mewtwo te ha derrotado");
-			    }
-		    } 
-		    else
-		    {
-			    MewtwoHAttackSet[valor].PPactual = "0";
-			    alert("Mewtwo ha intentado usar un ataque, pero ya no tiene muchas energias para hacerlo");
 		    }
 		}
 	);
@@ -111,52 +135,54 @@ $.getJSON("Pokemon.json", function(data){
 			$(this).click(function(){
            		event.preventDefault();
 			    var A = aleatorio(85, 100);
-
-			    if(CharizardAttakcSet[valor].AttackTipe == "Especial" && CharizardAttakcSet[valor].PPactual > 0)
-			    {
-			    	var B = 1.5;
-				    var daño = (0.01* B* 1*A*((0.2* CharizardLVL + 1)*(CharizardSpatk * CharizardAttakcSet[valor].Potencia)/(25 * MewtwoSpdef)) + 2);
-				    MewtwoHP -= Math.round(daño);
-					CharizardAttakcSet[valor].PPactual -= 1;
-
-				    if(MewtwoHP > 0)
+			    if(CharizardHP > 0)
+		    	{
+				    if(CharizardAttakcSet[valor].AttackTipe == "Especial" && CharizardAttakcSet[valor].PPactual > 0)
 				    {
-					    $("#MewtwoHP").text("HP: " + MewtwoHP);
-					    $("#pp"+[valor]+"actual").text(CharizardAttakcSet[valor].PPactual);
+				    	var B = 1.5;
+					    var daño = (0.01* B* 1*A*((0.2* CharizardLVL + 1)*(CharizardSpatk * CharizardAttakcSet[valor].Potencia)/(25 * MewtwoSpdef)) + 2);
+					    MewtwoHP -= Math.round(daño);
+						CharizardAttakcSet[valor].PPactual -= 1;
+
+					    if(MewtwoHP > 0)
+					    {
+						    $("#MewtwoHP").text("HP: " + MewtwoHP);
+						    $("#pp"+[valor]+"actual").text(CharizardAttakcSet[valor].PPactual);
+					    }
+					    else
+					    {
+					    	$("#MewtwoHP").text("HP: Fainted");
+					    	$("#pp"+[valor]+"actual").text(CharizardAttakcSet[valor].PPactual);
+					    	alert("Lo haz logrado!, HAZ VENCIDO A MEWTWO!!");
+					    }
 				    }
+				    else if(CharizardAttakcSet[valor].AttackTipe == "Fisico"  && CharizardAttakcSet[valor].PPactual > 0)
+				    {
+				    	var B = 1;
+						var daño = (0.01* B* 1*A*((0.2* CharizardLVL + 1)*(CharizardAtk * CharizardAttakcSet[valor].Potencia)/(25 * MewtwoDef)) + 2);
+						MewtwoHP -= Math.round(daño);
+					    CharizardAttakcSet[valor].PPactual -= 1;
+
+					    if(MewtwoHP > 0)
+					    {
+						   
+						    $("#MewtwoHP").text("HP: " + MewtwoHP);
+						    $("#pp"+[valor]+"actual").text(CharizardAttakcSet[valor].PPactual);
+					    }
+					    else
+					    {
+					    	$("#MewtwoHP").text("HP: Fainted");
+					    	$("#pp"+[valor]+"actual").text(CharizardAttakcSet[valor].PPactual);
+					    	alert("Lo haz logrado!, HAZ VENCIDO A MEWTWO!!");
+					    }
+				    } 
 				    else
 				    {
-				    	$("#MewtwoHP").text("HP: Fainted");
-				    	$("#pp"+[valor]+"actual").text(CharizardAttakcSet[valor].PPactual);
-				    	alert("Lo haz logrado!, HAZ VENCIDO A MEWTWO!!");
-				    }
-			    }
-			    else if(CharizardAttakcSet[valor].AttackTipe == "Fisico"  && CharizardAttakcSet[valor].PPactual > 0)
-			    {
-			    	var B = 1;
-					var daño = (0.01* B* 1*A*((0.2* CharizardLVL + 1)*(CharizardAtk * CharizardAttakcSet[valor].Potencia)/(25 * MewtwoDef)) + 2);
-					MewtwoHP -= Math.round(daño);
-				    CharizardAttakcSet[valor].PPactual -= 1;
-
-				    if(MewtwoHP > 0)
-				    {
-					   
-					    $("#MewtwoHP").text("HP: " + MewtwoHP);
+					    CharizardAttakcSet[valor].PPactual = "0";
 					    $("#pp"+[valor]+"actual").text(CharizardAttakcSet[valor].PPactual);
+					    alert("Ya no puedes usar mas ese ataque!");
 				    }
-				    else
-				    {
-				    	$("#MewtwoHP").text("HP: Fainted");
-				    	$("#pp"+[valor]+"actual").text(CharizardAttakcSet[valor].PPactual);
-				    	alert("Lo haz logrado!, HAZ VENCIDO A MEWTWO!!");
-				    }
-			    } 
-			    else
-			    {
-				    CharizardAttakcSet[valor].PPactual = "0";
-				    $("#pp"+[valor]+"actual").text(CharizardAttakcSet[valor].PPactual);
-				    alert("Ya no puedes usar mas ese ataque!");
-			    }
+		    	}
 			});
 		});
 	imprimirDatosPokemon();
