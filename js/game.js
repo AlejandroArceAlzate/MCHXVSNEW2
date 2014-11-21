@@ -1,5 +1,5 @@
 $.getJSON("Pokemon.json", function(data){
-
+	// Estadisticas Charizard
 	var CharizardName = data.Pokemon[0].Name,
 		CharizardLVL = data.Pokemon[0].Level,
 		CharizardTipe = data.Pokemon[0].Tipe,
@@ -9,7 +9,7 @@ $.getJSON("Pokemon.json", function(data){
 		CharizardSpdef = data.Pokemon[0].Spdef,
 		CharizardHP = data.Pokemon[0].Hp,
 		CharizardAttakcSet = data.Pokemon[0].AttackSet;
-
+	// Estadisticas Mewtwo
 	var MewtwoName = data.Pokemon[1].Name,
 		MewtwoHP = data.Pokemon[1].Hp,
 		MewtwoLVL = data.Pokemon[1].Level,
@@ -20,6 +20,9 @@ $.getJSON("Pokemon.json", function(data){
 		MewtwoSpdef = data.Pokemon[1].Spdef,
 		MewtwoHp = data.Pokemon[1].Hp,
 		MewtwoAttackSet = data.Pokemon[1].AttackSet;
+	// Consumibles
+	var Pocion = 3,
+		Pokebola = 10;
 
 	function imprimirDatosPokemon()
 	{
@@ -57,7 +60,7 @@ $.getJSON("Pokemon.json", function(data){
 		return numero;
 	}
 
-	$(".ataques").on("click", function()
+	$(".ataques").on("click", function MewtwoAtaca()
 		{
 			var A = aleatorio(85, 100);
 			var valor = aleatorio(0, 3);
@@ -128,7 +131,8 @@ $.getJSON("Pokemon.json", function(data){
 		}
 	);
 
-	$(".ataque").each(function(){
+	$(".ataque").each(function CharizardAtaca()
+		{
           // Definimos una variable valor usando como dato el atributo value
 			var valor = $(this).attr("value");
           // ejecutamos la función click sobre el elemento que estamos clickando
@@ -185,6 +189,101 @@ $.getJSON("Pokemon.json", function(data){
 		    	}
 			});
 		});
+		    
+	$(".pocion").on("click", function Pociones(){
+		
+		event.preventDefault();
+		
+		
+		if(CharizardHP >0 && CharizardHP < 416 && Pocion > 0)
+		{
+	    	CharizardHP += 150;
+	    	Pocion -= 1;
+	    	console.log(Pocion);
+	    	if(CharizardHP > 360)
+	    		CharizardHP = 360; 
+	    	$("#CharizardHP").text("HP: " + CharizardHP);
+    	}
+    	else
+    	{
+    		alert("Intentaste usar una pocion, pero fallaste..");
+    	}
+	})
+
+		
+	$(".pokebola").on("click", function AtraparMewtwo(){
+
+		if(MewtwoHP > 0 && CharizardHP > 0 && Pokebola > 0)
+    	{
+    		if(MewtwoHP >= 400)
+    		{
+    			probabilidad = aleatorio(0, 99);
+    			if(probabilidad == 1)
+    			{
+    				$("#CharizardHP").text("HP: Victory!");
+    				$("#MewtwoHP").text("HP: Catched!");
+				    alert("Lo haz logrado, haz atrapado a Mewtwo!!");
+    			}
+    			else
+    			{
+    				Pokebola -= 1;
+    				alert("Usaste una Pokebola... pero Mewtwo se ha escapado!");
+    			}
+    		}
+    		else if(MewtwoHP >= 200 && MewtwoHP < 400)
+    		{
+    			probabilidad = aleatorio(0, 24);
+    			if(probabilidad == 1)
+    			{
+    				$("#CharizardHP").text("HP: Victory!");
+    				$("#MewtwoHP").text("HP: Catched!");
+				    alert("Lo haz logrado, haz atrapado a Mewtwo!!");
+    			}
+    			else
+    			{
+    				Pokebola -= 1;
+    				alert("Usaste una Pokebola... pero Mewtwo se ha escapado!");
+    			}
+    		}
+    		else if(MewtwoHP >= 50 && MewtwoHP < 200)
+    		{
+    			probabilidad = aleatorio(0, 9);
+    			if(probabilidad == 1)
+    			{
+    				$("#CharizardHP").text("HP: Victory!");
+    				$("#MewtwoHP").text("HP: Catched!");
+				    alert("Lo haz logrado, haz atrapado a Mewtwo!!");
+    			}
+    			else
+    			{
+    				Pokebola -= 1;
+    				alert("Usaste una Pokebola... pero Mewtwo se ha escapado!");
+    			}
+    		}
+    		else if(MewtwoHP < 50)
+    		{
+    			probabilidad = aleatorio(0, 6);
+    			if(probabilidad == 1)
+    			{
+    				$("#CharizardHP").text("HP: Victory!");
+    				$("#MewtwoHP").text("HP: Catched!");
+				    alert("Lo haz logrado, haz atrapado a Mewtwo!!");
+    			}
+    			else
+    			{
+    				Pokebola -= 1;
+    				alert("Usaste una Pokebola... pero Mewtwo se ha escapado!");
+    			}
+    		}
+    	}
+    	else
+    	{
+    		alert("No puedes usar la Pokebola!")
+    	}
+    	console.log("la probabilidad fue " + probabilidad);
+    	console.log("te quedan " + Pokebola);
+	})
+    	
 	imprimirDatosPokemon();
 
 });
