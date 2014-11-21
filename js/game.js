@@ -24,6 +24,7 @@ $.getJSON("Pokemon.json", function(data){
 	var Pocion = 3,
 		Pokebola = 10;
 
+	//Funcion para imprimir los datos de los pokemon en la pantalla
 	function imprimirDatosPokemon()
 	{
 
@@ -53,13 +54,13 @@ $.getJSON("Pokemon.json", function(data){
 		$("#MewtwoLVL").text("LVL: " + MewtwoLVL);
 		$("#MewtwoTipo").text("Tipo: " + MewtwoTipe);
 	}
-
+	//Funcion para sacar numeros aleatorios, que sera usada en varias de las formulas
 	function aleatorio(minimo, maximo)
 	{
 		var numero = Math.floor( Math.random() * (maximo - minimo + 1) + minimo);
 		return numero;
 	}
-
+	//Funcion para cuando Mewtwo ataca
 	$(".ataques").on("click", function MewtwoAtaca()
 		{
 			var A = aleatorio(85, 100);
@@ -130,7 +131,7 @@ $.getJSON("Pokemon.json", function(data){
 		    }
 		}
 	);
-
+	//Funcion para cuando Charizard ataca
 	$(".ataque").each(function CharizardAtaca()
 		{
           // Definimos una variable valor usando como dato el atributo value
@@ -189,7 +190,7 @@ $.getJSON("Pokemon.json", function(data){
 		    	}
 			});
 		});
-		    
+	//Funcion para el uso de pociones
 	$(".pocion").on("click", function Pociones(){
 		
 		event.preventDefault();
@@ -210,7 +211,7 @@ $.getJSON("Pokemon.json", function(data){
     	}
 	})
 
-		
+	//Funcion para el uso de las pokebolas
 	$(".pokebola").on("click", function AtraparMewtwo(){
 
 		if(MewtwoHP > 0 && CharizardHP > 0 && Pokebola > 0)
