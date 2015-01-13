@@ -49,6 +49,9 @@ $.getJSON("Pokemon.json", function(data){
 		$("#pp3actual").text(data.Pokemon[0].AttackSet[3].PPactual);
 		$("#pp3total").text("/" + data.Pokemon[0].AttackSet[3].PPtotal);
 
+		$(".numPociones").text(Pocion);
+		$(".numPokebolas").text(Pokebola);
+
 		$("#NombreMewtwo").text(MewtwoName);
 		$("#MewtwoHP").text("HP: " + MewtwoHP);
 		$("#MewtwoLVL").text("LVL: " + MewtwoLVL);
@@ -65,16 +68,15 @@ $.getJSON("Pokemon.json", function(data){
 		{
 			var A = aleatorio(85, 100);
 			var valor = aleatorio(0, 3);
-			console.log("entra en la funcion");
 			if(MewtwoHP > 0)
 		    {
 			    if(MewtwoAttackSet[valor].AttackTipe == "Especial" && MewtwoAttackSet[valor].PPactual > 0)
 			    {
+			    	alert("Mewtwo a usado " + MewtwoAttackSet[valor].AttackName);
 			    	var B = 1.5;
 				    var daño = (0.01* B* 1*A*((0.2* MewtwoLVL + 1)*(MewtwoSpatk * MewtwoAttackSet[valor].Potencia)/(25 * CharizardSpdef)) + 2);
 				    CharizardHP -= Math.round(daño);
 					MewtwoAttackSet[valor].PPactual -= 1;
-					console.log("entra en la condicion Especial");
 				    if(CharizardHP > 0)
 				    {
 					    $("#CharizardHP").text("HP: " + CharizardHP);
@@ -87,15 +89,11 @@ $.getJSON("Pokemon.json", function(data){
 			    }
 			    else if(MewtwoAttackSet[valor].AttackTipe == "Fisico"  && MewtwoAttackSet[valor].PPactual > 0)
 			    {
+			    	alert("Mewtwo a usado " + MewtwoAttackSet[valor].AttackName);
 			    	var B = 1;
 					var daño = (0.01* B* 1*A*((0.2* MewtwoLVL + 1)*(MewtwoAtk * MewtwoAttackSet[valor].Potencia)/(25 * CharizardDef)) + 2);
 					CharizardHP -= Math.round(daño);
 				    MewtwoAttackSet[valor].PPactual -= 1;
-				    console.log("entra en la condicion Fisico");
-				    console.log(MewtwoAttackSet[valor].AttackTipe);
-				    console.log(MewtwoAttackSet[valor].AttackName);
-				    console.log(MewtwoAttackSet[valor].Potencia);
-				    console.log(daño);
 
 				    if(CharizardHP > 0)
 				    {
@@ -115,12 +113,12 @@ $.getJSON("Pokemon.json", function(data){
 				    	MewtwoAttackSet[valor].PPactual -= 1;
 				    	if(MewtwoHP > 416)
 				    		MewtwoHP = 416; 
-					    console.log(MewtwoAttackSet[valor].AttackName);
+					    alert("Mewtwo a usado " + MewtwoAttackSet[valor].AttackName);
 				    	$("#MewtwoHP").text("HP: " + MewtwoHP);
 			    	}
 			    	else
 			    	{
-			    		console.log("Mewtwo a intentado usar " + MewtwoAttackSet[valor].AttackName + " pero fallo..");
+			    		alert("Mewtwo a intentado usar " + MewtwoAttackSet[valor].AttackName + " pero fallo..");
 			    	}
 			    }
 			    else
@@ -200,7 +198,7 @@ $.getJSON("Pokemon.json", function(data){
 		{
 	    	CharizardHP += 150;
 	    	Pocion -= 1;
-	    	console.log(Pocion);
+	  		$(".numPociones").text(Pocion);
 	    	if(CharizardHP > 360)
 	    		CharizardHP = 360; 
 	    	$("#CharizardHP").text("HP: " + CharizardHP);
@@ -213,6 +211,8 @@ $.getJSON("Pokemon.json", function(data){
 
 	//Funcion para el uso de las pokebolas
 	$(".pokebola").on("click", function AtraparMewtwo(){
+
+		event.preventDefault();
 
 		if(MewtwoHP > 0 && CharizardHP > 0 && Pokebola > 0)
     	{
@@ -228,6 +228,7 @@ $.getJSON("Pokemon.json", function(data){
     			else
     			{
     				Pokebola -= 1;
+    				$(".numPokebolas").text(Pokebola);
     				alert("Usaste una Pokebola... pero Mewtwo se ha escapado!");
     			}
     		}
@@ -243,6 +244,7 @@ $.getJSON("Pokemon.json", function(data){
     			else
     			{
     				Pokebola -= 1;
+    				$(".numPokebolas").text(Pokebola);
     				alert("Usaste una Pokebola... pero Mewtwo se ha escapado!");
     			}
     		}
@@ -258,6 +260,7 @@ $.getJSON("Pokemon.json", function(data){
     			else
     			{
     				Pokebola -= 1;
+    				$(".numPokebolas").text(Pokebola);
     				alert("Usaste una Pokebola... pero Mewtwo se ha escapado!");
     			}
     		}
@@ -273,6 +276,7 @@ $.getJSON("Pokemon.json", function(data){
     			else
     			{
     				Pokebola -= 1;
+    				$(".numPokebolas").text(Pokebola);
     				alert("Usaste una Pokebola... pero Mewtwo se ha escapado!");
     			}
     		}
@@ -281,8 +285,6 @@ $.getJSON("Pokemon.json", function(data){
     	{
     		alert("No puedes usar la Pokebola!")
     	}
-    	console.log("la probabilidad fue " + probabilidad);
-    	console.log("te quedan " + Pokebola);
 	})
     	
 	imprimirDatosPokemon();
